@@ -3,7 +3,7 @@ const UserModel = require("../models/user.model");
 const userRoutes = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { verifyToken } = require("../middlewares/authenticate");
+
 
 userRoutes.get("/",async(req,res)=>{
     try{
@@ -64,8 +64,6 @@ userRoutes.post("/login", async (req, res) => {
       res.status(400).send({ msg: e.message });
   }
 });
-
-userRoutes.use(verifyToken);
 
 userRoutes.patch("/update/:id",async(req,res)=>{
   
