@@ -66,9 +66,10 @@ userRoutes.post("/login", async (req, res) => {
 });
 
 userRoutes.patch("/update/:id",async(req,res)=>{
-  
+  let user = UserModel.findOne({_id:req.params.id});
+  let payload ={...user,coins:req.body.coins}
   try {
-    await UserModel.findByIdAndUpdate(req.params.id, req.body);
+    await UserModel.findByIdAndUpdate(req.params.id, payload);
     res.status(200).send({ msg: "User details has been updated", status: "success" });
 } catch (e) {
     res.status(400).send({ msg: e.message });
